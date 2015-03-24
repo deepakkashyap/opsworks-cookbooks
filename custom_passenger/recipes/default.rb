@@ -10,7 +10,7 @@ include_recipe "nginx_passenger"
 
 nginx_passenger_site node[:custompassenger][:appname] do
   action :create
-  dir    node[:custompassenger][:clonelocation]
+  dir    "#{node[:deploy][application][:deploy_to]}/current"
   server "localhost"
   rails_env "production"
 end
