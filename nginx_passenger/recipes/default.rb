@@ -28,7 +28,6 @@ package "nginx-common" do
   options '-o DPkg::Options::="--force-confold"'
 end
 
-package "passenger"
 package "nginx-extras"
 
 # -- Define a service we can use later -- #
