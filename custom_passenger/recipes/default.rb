@@ -1,6 +1,6 @@
 
 include_recipe "nginx_passenger"
-include_recipe "deploy"
+include_attribute "deploy"
 
 node.normal.nginx_passenger.sites_dir="#{node[:deploy][application][:deploy_to]}/current"
 
