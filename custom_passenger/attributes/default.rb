@@ -1,5 +1,5 @@
 
-include_attribute "deploy::deploy"
+include_attribute "deploy"
 
 default["custompassenger"]["clonelocation"] = "/home/ubuntu/test"
 default["custompassenger"]["repourl"] = "https://github.com/RailsApps/rails-signup-download.git"
