@@ -1,6 +1,5 @@
 
 include_recipe "nginx_passenger"
-include_attribute "deploy::deploy"
 
 nginx_passenger_site "test" do
   action :create
