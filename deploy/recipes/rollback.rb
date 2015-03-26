@@ -1,8 +1,6 @@
 
 
 if app[:state] == 'restart'
-    Chef::Log.warn("Restart gonna work")
-    
   directory "/var/lib/restart" do
   owner 'root'
   group 'root'
@@ -10,9 +8,8 @@ if app[:state] == 'restart'
   action :create
   end
 end
-elseif app[:state] == 'stop'
-    Chef::Log.warn("Restart gonna work")
-    
+
+elsif app[:state] == 'stop'
   directory "/var/lib/stop" do
   owner 'root'
   group 'root'
