@@ -5,7 +5,7 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-  if deploy[:application_type] != 'static'
+  if deploy[:application_type] != 'other'
     Chef::Log.debug("Skipping deploy::web-restart application #{application} as it is not a static HTML app")
     next
   end
