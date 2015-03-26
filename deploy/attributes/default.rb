@@ -16,3 +16,5 @@
 
 include_attribute "deploy::deploy"
 include_attribute "deploy::customize"
+
+default.app.state =  "try"
