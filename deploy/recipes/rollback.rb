@@ -1,0 +1,13 @@
+
+
+if app[:state] == 'restart'
+    Chef::Log.warn("Restart gonna work")
+    
+  directory "/var/lib/foo" do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+  end
+  
+end
