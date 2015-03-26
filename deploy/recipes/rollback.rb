@@ -1,6 +1,6 @@
 
 
-if app[:state] == 'restart'
+if #{node[:app][:state]}" == 'restart'
   Chef::Log.warn("Restart gonna work")
     
   directory "/var/lib/restart" do
