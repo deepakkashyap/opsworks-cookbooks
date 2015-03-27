@@ -14,3 +14,4 @@ if "#{node[:app][:state]}" == 'restart'
   mode '0755'
   action :create
  end
+end
