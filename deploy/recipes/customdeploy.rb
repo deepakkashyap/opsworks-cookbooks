@@ -53,8 +53,10 @@ elseif "#{node[:app][:state]}" == 'rollback'
   deploy deploy[:deploy_to] do
     user deploy[:user]
     environment "RAILS_ENV" => deploy[:rails_env], "RUBYOPT" => ""
+    Chef::Log.info("############## calling rollback action ############")
     action "rollback"
   #  restart_command "sleep #{deploy[:sleep_before_restart]} && #{node[:opsworks][:rails_stack][:restart_command]}"
+    Chef::Log.info("##############restarting nginx ############")
     service "nginx" do
     action :restart
     end 
