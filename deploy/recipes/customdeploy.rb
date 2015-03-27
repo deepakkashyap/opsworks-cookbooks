@@ -42,6 +42,8 @@ elsif "#{node[:app][:state]}" == 'restart'
 
    action :restart
    end
+   
+   
 elsif "#{node[:app][:state]}" == 'rollback'
     node[:deploy].each do |application, deploy|
 
@@ -57,9 +59,9 @@ elsif "#{node[:app][:state]}" == 'rollback'
     action "rollback"
     #restart_command "sleep #{deploy[:sleep_before_restart]} && #{node[:opsworks][:rails_stack][:restart_command]}"
    # Chef::Log.info("##############restarting nginx ############")
-    #service "nginx" do
-     #  action :restart
-    #end 
+  service "nginx" do
+      action :restart
+  end 
     only_if do
       File.exists?(deploy[:current_path])
     end
