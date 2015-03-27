@@ -42,7 +42,7 @@ elsif "#{node[:app][:state]}" == 'restart'
 
    action :restart
    end
-elseif "#{node[:app][:state]}" == 'rollback'
+elsif "#{node[:app][:state]}" == 'rollback'
     node[:deploy].each do |application, deploy|
 
   if deploy[:application_type] != 'other'
