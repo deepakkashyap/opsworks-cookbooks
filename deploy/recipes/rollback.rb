@@ -1,7 +1,7 @@
 
 
 if "#{node[:app][:state]}" == 'restart' 
-  Chef::Log.warn("Restart gonna work")
+  Chef::Log.warn("Restart gonna work ##############################################################################")
     
   directory "/var/lib/restart" do
   owner 'root'
