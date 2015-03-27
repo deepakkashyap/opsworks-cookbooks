@@ -42,6 +42,26 @@ elsif "#{node[:app][:state]}" == 'restart'
 
    action :restart
    end
- 
+elseif "#{node[:app][:state]}" == 'rollback'
+    node[:deploy].each do |application, deploy|
+
+  if deploy[:application_type] != 'other'
+    Chef::Log.debug("Skipping deploy::rails-rollback application #{application} type is not :'other'")
+    next
+  end
+
+  deploy deploy[:deploy_to] do
+    user deploy[:user]
+    environment "RAILS_ENV" => deploy[:rails_env], "RUBYOPT" => ""
+    action "rollback"
+  #  restart_command "sleep #{deploy[:sleep_before_restart]} && #{node[:opsworks][:rails_stack][:restart_command]}"
+    service "nginx" do
+    action :restart
+    end 
+    only_if do
+      File.exists?(deploy[:current_path])
+    end
+  end
+end
   
 end
