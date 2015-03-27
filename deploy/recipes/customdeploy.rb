@@ -1,7 +1,7 @@
 
 if "#{node[:app][:state]}" == 'deploy' 
     include_recipe "deploy"
-
+     Chef::Log.info("############## installing libmcrypt-dev ############")
      apt_package "libmcrypt-dev" do
          action :install
      end
