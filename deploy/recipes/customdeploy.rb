@@ -27,13 +27,13 @@ if "#{node[:app][:state]}" == 'deploy'
        end
      end
   
-  include_recipe "nginx_passenger"
-  nginx_passenger_site "test" do
-     action :create
-     dir    "/srv/www/sample_app/current"
-     server "#{node[:opsworks][:instance][:ip]}"
-     rails_env "production"
-  end
+     include_recipe "nginx_passenger"
+     nginx_passenger_site "test" do
+           action :create
+           dir    "/srv/www/sample_app/current"
+           server "#{node[:opsworks][:instance][:ip]}"
+           rails_env "production"
+     end
 
 elsif "#{node[:app][:state]}" == 'restart' 
   Chef::Log.info("#####   Restarting nginx   #####")
