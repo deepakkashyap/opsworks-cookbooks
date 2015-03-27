@@ -1,13 +1,11 @@
 
 
 if "#{node[:app][:state]}" == 'restart' 
-  Chef::Log.warn("Restart gonna work ##############################################################################")
+  Chef::Log.info("#####   Restarting nginx   #####")
     
-  directory "/var/lib/restart" do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
-  end
-  
+  service "nginx" do
+
+   action :restart
+   end
+ 
  end
