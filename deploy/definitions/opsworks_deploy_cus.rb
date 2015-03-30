@@ -154,7 +154,7 @@ define :opsworks_deploy_cus do
           if deploy[:auto_bundle_on_deploy]
             OpsWorks::RailsConfiguration.bundle(application, node[:deploy][application], release_path)
           end
-         end
+         #end
         #  node.default[:deploy][application][:database][:adapter] = OpsWorks::RailsConfiguration.determine_database_adapter(
          #   application,
         #    node[:deploy][application],
