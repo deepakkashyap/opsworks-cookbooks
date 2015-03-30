@@ -129,14 +129,32 @@ define :opsworks_deploy_cus do
           end.run_action(:create)
         elsif deploy[:application_type] == 'aws-flow-ruby'
           OpsWorks::RailsConfiguration.bundle(application, node[:deploy][application], release_path)
+        elsif deploy[:application_type] == 'php'
+          template "#{node[:deploy][application][:deploy_to]}/shared/config/opsworks.php" do
+            cookbook 'php'
+            source 'opsworks.php.erb'
+            mode '0660'
+            owner node[:deploy][application][:user]
+            group node[:deploy][application][:group]
+            variables(
+              :database => node[:deploy][application][:database],
+              :memcached => node[:deploy][application][:memcached],
+              :layers => node[:opsworks][:layers],
+              :stack_name => node[:opsworks][:stack][:name]
+            )
+            only_if do
+              File.exists?("#{node[:deploy][application][:deploy_to]}/shared/config")
+            end
+          end
+
+         
           
           
-          
-            elsif deploy[:application_type] == 'other'
+        elsif deploy[:application_type] == 'other'
           if deploy[:auto_bundle_on_deploy]
             OpsWorks::RailsConfiguration.bundle(application, node[:deploy][application], release_path)
           end
-
+         end
         #  node.default[:deploy][application][:database][:adapter] = OpsWorks::RailsConfiguration.determine_database_adapter(
          #   application,
         #    node[:deploy][application],
@@ -157,31 +175,12 @@ define :opsworks_deploy_cus do
 
             #only_if do
             #  deploy[:database][:host].present?
-            end
+            #end
           #end.run_action(:create)
 
           
           
-          
-        elsif deploy[:application_type] == 'php'
-          template "#{node[:deploy][application][:deploy_to]}/shared/config/opsworks.php" do
-            cookbook 'php'
-            source 'opsworks.php.erb'
-            mode '0660'
-            owner node[:deploy][application][:user]
-            group node[:deploy][application][:group]
-            variables(
-              :database => node[:deploy][application][:database],
-              :memcached => node[:deploy][application][:memcached],
-              :layers => node[:opsworks][:layers],
-              :stack_name => node[:opsworks][:stack][:name]
-            )
-            only_if do
-              File.exists?("#{node[:deploy][application][:deploy_to]}/shared/config")
-            end
-          end
-
-
+         
 
         elsif deploy[:application_type] == 'nodejs'
           if deploy[:auto_npm_install_on_deploy]
