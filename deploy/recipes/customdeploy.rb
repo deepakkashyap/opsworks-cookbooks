@@ -21,7 +21,7 @@ if "#{node[:app][:state]}" == 'deploy'
             path deploy[:deploy_to]
         end
 
-       opsworks_deploy do
+       opsworks_deploy_dir do
           deploy_data deploy
           app application
        end
