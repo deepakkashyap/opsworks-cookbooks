@@ -137,28 +137,28 @@ define :opsworks_deploy_cus do
             OpsWorks::RailsConfiguration.bundle(application, node[:deploy][application], release_path)
           end
 
-          node.default[:deploy][application][:database][:adapter] = OpsWorks::RailsConfiguration.determine_database_adapter(
-            application,
-            node[:deploy][application],
-            release_path,
-            :force => node[:force_database_adapter_detection],
-            :consult_gemfile => node[:deploy][application][:auto_bundle_on_deploy]
-          )
-          template "#{node[:deploy][application][:deploy_to]}/shared/config/database.yml" do
-            cookbook "rails"
-            source "database.yml.erb"
-            mode "0660"
-            owner node[:deploy][application][:user]
-            group node[:deploy][application][:group]
-            variables(
-              :database => node[:deploy][application][:database],
-              :environment => node[:deploy][application][:rails_env]
-            )
+        #  node.default[:deploy][application][:database][:adapter] = OpsWorks::RailsConfiguration.determine_database_adapter(
+         #   application,
+        #    node[:deploy][application],
+        #    release_path,
+        #    :force => node[:force_database_adapter_detection],
+        #    :consult_gemfile => node[:deploy][application][:auto_bundle_on_deploy]
+        #  )
+        #  template "#{node[:deploy][application][:deploy_to]}/shared/config/database.yml" do
+        #    cookbook "rails"
+        #    source "database.yml.erb"
+        #    mode "0660"
+            #owner node[:deploy][application][:user]
+            #group node[:deploy][application][:group]
+            #variables(
+            #  :database => node[:deploy][application][:database],
+             # :environment => node[:deploy][application][:rails_env]
+            #)
 
-            only_if do
-              deploy[:database][:host].present?
+            #only_if do
+            #  deploy[:database][:host].present?
             end
-          end.run_action(:create)
+          #end.run_action(:create)
 
           
           
