@@ -16,13 +16,13 @@ if "#{node[:app][:state]}" == 'deploy'
        Chef::Log.info("Deploying application #{application} on #{node[:opsworks][:instance][:hostname]}")
 
 
-       opsworks_deploy_dir do
+       opsworks_deploy_cus do
            user deploy[:user]
             group deploy[:group]
             path deploy[:deploy_to]
         end
 
-       opsworks_deploy_dir do
+       opsworks_deploy_cus do
           deploy_data deploy
           app application
        end
