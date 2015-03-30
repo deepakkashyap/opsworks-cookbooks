@@ -67,6 +67,9 @@ elsif "#{node[:app][:state]}" == 'rollback'
       File.exists?(deploy[:current_path])
     end
   end
+   service "nginx" do
+     action :restart
+   end
 end
   
 end
