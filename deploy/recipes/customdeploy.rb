@@ -1,5 +1,10 @@
 
 if "#{node[:app][:state]}" == 'deploy' 
+    
+    if deploy[:application_type] != 'other'
+          Chef::Log.warn("Skipping deploy::web application #{application}")
+          next
+    end  
     include_recipe "deploy"
      Chef::Log.info("############## installing libmcrypt-dev ############")
      apt_package "libmcrypt-dev" do
@@ -10,10 +15,6 @@ if "#{node[:app][:state]}" == 'deploy'
 
        Chef::Log.info("Deploying application #{application} on #{node[:opsworks][:instance][:hostname]}")
 
-       if deploy[:application_type] != 'other'
-          Chef::Log.warn("Skipping deploy::web application #{application}")
-          next
-       end
 
        opsworks_deploy_dir do
            user deploy[:user]
